@@ -20,7 +20,7 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
     var v = YPFiltersView()
     
     var filterPreviews = [YPFilterPreview]()
-    var filters = [YPFilter]()
+    public var filters = [YPFilter]()
     public var selectedFilter: YPFilter?
     
     var inputPhoto: YPMediaPhoto!
@@ -29,8 +29,8 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
     
     private var isFromSelectionVC = false
     
-    public var didSave: ((YPMediaItem) -> Void)?
-    public var didCancel: (() -> Void)?
+	public var didSave: ((YPMediaItem) -> Void)?
+	public var didCancel: (() -> Void)?
     
     override open func loadView() { view = v }
     
@@ -63,16 +63,33 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        
+	
+	if nil != selectedFilter {
+		inputPhoto.modifiedImage = selectedFilter?.filter(inputPhoto.originalImage)
+	}
+	
         v.imageView.image = inputPhoto.image
         thumbImage = thumbFromImage(inputPhoto.originalImage)
         v.collectionView.register(YPFilterCollectionViewCell.self, forCellWithReuseIdentifier: "FilterCell")
         v.collectionView.dataSource = self
         v.collectionView.delegate = self
-        v.collectionView.selectItem(at: IndexPath(row: 0, section: 0),
+	
+	var selected_row = 0
+	
+	for f in filters {
+		if f.name.compare(selectedFilter?.name ?? "") == .orderedSame {
+			break
+		}
+		
+		selected_row += 1
+	}
+	
+	let index = IndexPath(row: selected_row, section: 0)
+	
+        v.collectionView.selectItem(at: index,
                                                   animated: false,
                                                   scrollPosition: UICollectionViewScrollPosition.bottom)
-        
+	
         // Navigation bar setup
         title = YPConfig.wordings.filter
         if isFromSelectionVC {
@@ -98,6 +115,11 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
         touchDownGR.delegate = self
         v.imageView.addGestureRecognizer(touchDownGR)
         v.imageView.isUserInteractionEnabled = true
+	
+	
+	DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+		self?.v.collectionView.scrollToItem(at: index, at: UICollectionViewScrollPosition.right, animated: false)
+	}
     }
     
     @objc
