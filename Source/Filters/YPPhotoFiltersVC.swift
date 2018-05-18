@@ -21,7 +21,7 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
     
     var filterPreviews = [YPFilterPreview]()
     var filters = [YPFilter]()
-    var selectedFilter: YPFilter?
+    public var selectedFilter: YPFilter?
     
     var inputPhoto: YPMediaPhoto!
     var filteredImage: UIImage?
