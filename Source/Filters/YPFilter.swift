@@ -11,7 +11,7 @@ import CoreImage
 
 var _filterSharedContext: CIContext!
 
-struct YPFilter {
+public struct YPFilter {
     
     var name = ""
     
