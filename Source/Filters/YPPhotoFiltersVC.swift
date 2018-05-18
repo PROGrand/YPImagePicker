@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol IsMediaFilterVC: class {
+public protocol IsMediaFilterVC: class {
     var didSave: ((YPMediaItem) -> Void)? { get set }
     var didCancel: (() -> Void)? { get set }
 }
@@ -29,8 +29,8 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
     
     private var isFromSelectionVC = false
     
-    var didSave: ((YPMediaItem) -> Void)?
-    var didCancel: (() -> Void)?
+    public var didSave: ((YPMediaItem) -> Void)?
+    public var didCancel: (() -> Void)?
     
     override open func loadView() { view = v }
     
