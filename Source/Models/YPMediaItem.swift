@@ -16,7 +16,7 @@ public class YPMediaPhoto {
     public var modifiedImage: UIImage?
     public let fromCamera: Bool
     
-    init(image: UIImage, fromCamera: Bool = false) {
+    public init(image: UIImage, fromCamera: Bool = false) {
         self.originalImage = image
         self.modifiedImage = nil
         self.fromCamera = fromCamera
