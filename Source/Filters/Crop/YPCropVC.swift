@@ -210,7 +210,7 @@ extension YPCropVC: UIGestureRecognizerDelegate {
     }
     
     /// Allow both Pinching and Panning at the same time.
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
                            shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
