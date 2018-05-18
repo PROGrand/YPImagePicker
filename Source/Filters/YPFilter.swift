@@ -13,13 +13,13 @@ var _filterSharedContext: CIContext!
 
 public struct YPFilter {
     
-    var name = ""
+    public var name = ""
     
-    init(_ name: String) {
+    public init(_ name: String) {
         self.name = name
     }
     
-    func filter(_ image: UIImage) -> UIImage {
+    public func filter(_ image: UIImage) -> UIImage {
         if name == "" {
             return image
         }
