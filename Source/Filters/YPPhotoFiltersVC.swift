@@ -88,7 +88,7 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
 	
         v.collectionView.selectItem(at: index,
                                                   animated: false,
-                                                  scrollPosition: UICollectionViewScrollPosition.bottom)
+                                                  scrollPosition: UICollectionView.ScrollPosition.bottom)
 	
         // Navigation bar setup
         title = YPConfig.wordings.filter
@@ -118,7 +118,7 @@ open class YPPhotoFiltersVC: UIViewController, IsMediaFilterVC, UIGestureRecogni
 	
 	
 	DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-		self?.v.collectionView.scrollToItem(at: index, at: UICollectionViewScrollPosition.right, animated: false)
+        self?.v.collectionView.scrollToItem(at: index, at: UICollectionView.ScrollPosition.right, animated: false)
 	}
     }
     

@@ -69,7 +69,7 @@ public class PanGestureHelper: NSObject, UIGestureRecognizerDelegate {
     func panned(_ sender: UIPanGestureRecognizer) {
         
         let containerHeight = v.assetViewContainer.frame.height
-        if sender.state == UIGestureRecognizerState.began {
+        if sender.state == UIGestureRecognizer.State.began {
             let view    = sender.view
             let loc     = sender.location(in: view)
             let subview = view?.hitTest(loc, with: nil)
@@ -94,7 +94,7 @@ public class PanGestureHelper: NSObject, UIGestureRecognizerDelegate {
                 (dragDirection == .down && dragStartPos.y > cropBottomY) {
                 dragDirection = .stop
             }
-        } else if sender.state == UIGestureRecognizerState.changed {
+        } else if sender.state == UIGestureRecognizer.State.changed {
             let currentPos = sender.location(in: v)
             if dragDirection == .up && currentPos.y < cropBottomY - dragDiff {
                 v.assetViewContainerConstraintTop.constant =
@@ -113,7 +113,7 @@ public class PanGestureHelper: NSObject, UIGestureRecognizerDelegate {
             }
         } else {
             imaginaryCollectionViewOffsetStartPosY = 0.0
-            if sender.state == UIGestureRecognizerState.ended && dragDirection == .stop {
+            if sender.state == UIGestureRecognizer.State.ended && dragDirection == .stop {
                 return
             }
             let currentPos = sender.location(in: v)
